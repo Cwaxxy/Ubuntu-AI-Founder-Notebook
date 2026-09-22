@@ -37,7 +37,7 @@ const aiLimiter = rateLimit({
 
 const conversations = new Map();
 
-const db = require("better-sqlite3")("ubuntu.db");
+const db = require("better-sqlite3")("data/ubuntu.db");
 
 db.prepare(`
   CREATE TABLE IF NOT EXISTS users (
