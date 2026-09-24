@@ -647,9 +647,25 @@ header h1 {
     const mobileMenuButton = document.getElementById("mobileMenuButton");
 const conversationSidebar = document.getElementById("conversationSidebar");
 
-mobileMenuButton.onclick = function () {
+mobileMenuButton.addEventListener("click", function (event) {
+  event.stopPropagation();
   conversationSidebar.classList.toggle("mobile-open");
-};
+});
+
+document.addEventListener("pointerdown", function (event) {
+  if (!conversationSidebar.classList.contains("mobile-open")) {
+    return;
+  }
+
+  if (
+    conversationSidebar.contains(event.target) ||
+    mobileMenuButton.contains(event.target)
+  ) {
+    return;
+  }
+
+  conversationSidebar.classList.remove("mobile-open");
+}, true);
 const newChatButton = document.getElementById("newChatButton");
 newChatButton.onclick = function () {
   const newConversationId = crypto.randomUUID();
