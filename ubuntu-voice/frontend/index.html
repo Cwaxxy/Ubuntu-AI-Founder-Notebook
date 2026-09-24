@@ -506,6 +506,7 @@ header h1 {
   .app-layout {
   position: relative;
   display: flex;
+  flex-direction: column;
   flex: 1 1 auto;
   min-height: 0;
   height: auto;
@@ -527,10 +528,12 @@ header h1 {
     display: block;
   }
 
-  .chat-area {
-    width: 100%;
-    height: 100%;
-  }
+ .chat-area {
+  width: 100%;
+  flex: 1 1 auto;
+  min-height: 0;
+  height: auto;
+} 
 
   #conversation {
     padding: 16px 6px;
