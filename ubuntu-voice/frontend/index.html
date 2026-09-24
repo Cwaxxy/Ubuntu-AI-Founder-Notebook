@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
 
   <title>Cwaxxy — Ubuntu Voice</title>
 
@@ -481,45 +481,54 @@ header h1 {
   align-self: stretch;
 }
 
-    @media (max-width: 520px) {
+   @media (max-width: 520px) {
+  html, body {
+    height: 100dvh;
+    overflow: hidden;
+    position: fixed;
+    width: 100%;
+  }
 
   body {
     padding: 0;
   }
 
   header {
-    padding: 10px 16px 12px;
+    padding: 10px 16px 10px 60px;
   }
 
   header h1 {
-    font-size: 24px;
+    font-size: 20px;
   }
 
   .tagline {
-    font-size: 12px;
+    font-size: 11px;
   }
 
   #mobileMenuButton {
-  display: none;
-}
+    display: block;
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    z-index: 1100;
+  }
 
   .app-layout {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  flex: 1 1 auto;
-  min-height: 0;
-  height: auto;
-  padding: 0 10px 10px;
-}
+    display: flex;
+    flex-direction: column;
+    height: calc(100dvh - 80px);
+    padding: 0 8px 8px;
+    gap: 8px;
+  }
+
   #conversationSidebar {
     display: none;
     position: fixed;
     top: 0;
     left: 0;
     width: 280px;
-    height: 100vh;
-    z-index: 1000;
+    height: 100dvh;
+    z-index: 1050;
     border-radius: 0 16px 16px 0;
     box-shadow: 4px 0 18px rgba(0,0,0,0.15);
   }
@@ -528,57 +537,43 @@ header h1 {
     display: block;
   }
 
- .chat-area {
-  width: 100%;
-  flex: 1 1 auto;
-  min-height: 0;
-  height: auto;
-} 
+  .chat-area {
+    width: 100%;
+    height: 100%;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+  }
 
   #conversation {
-    padding: 16px 6px;
-  }
-
-  .input-bar {
-  flex-wrap: wrap;
-  position: sticky;
-  bottom: 0;
-  z-index: 10;
-}
-  #userInput {
-    order: 1;
-    flex-basis: 100%;
-  }
-
-  #micButton {
-    order: 2;
-    flex: 1;
-  }
-
-  #sendButton {
-    order: 3;
-    flex: 1;
+    padding: 12px 6px;
   }
 
   .message {
-    max-width: 90%;
+    max-width: 88%;
   }
 
-  #mobileMenuButton {
-  display: block;
-  position: fixed;
-  top: 12px;
-  left: 12px;
-  z-index: 1100;
-  width: 42px;
-  height: 42px;
-  border: none;
-  border-radius: 10px;
-  background: white;
-  font-size: 22px;
-  cursor: pointer;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-}
+  .input-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 10px;
+    position: relative;
+    width: 100%;
+    flex-shrink: 0;
+  }
+
+  #userInput {
+    width: 100%;
+    order: 1;
+  }
+
+  #micButton,
+  #sendButton {
+    flex: 1;
+    min-height: 48px;
+    order: 2;
+  }
 }
   </style>
 </head>
