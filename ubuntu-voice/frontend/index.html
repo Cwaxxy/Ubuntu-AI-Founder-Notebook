@@ -566,11 +566,15 @@ header h1 {
   align-items: center;
   gap: 8px;
   padding: 8px;
-  position: relative;
-  width: 100%;
-  flex: 0 0 auto;
+  position: fixed;
+  left: 8px;
+  right: 8px;
+  bottom: 8px;
+  width: auto;
+  flex: none;
   min-height: 64px;
-  margin-top: auto;
+  z-index: 1000;
+  margin: 0;
 }
 
 #userInput {
