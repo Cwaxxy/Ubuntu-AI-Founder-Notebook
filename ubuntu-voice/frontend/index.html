@@ -58,6 +58,29 @@
   font-weight: 600;
 }
 
+.early-access-note {
+  margin: 0 0 20px;
+  padding: 12px 14px;
+  border: 1px solid #e5e5df;
+  border-radius: 12px;
+  background: #fafaf7;
+  text-align: center;
+}
+
+.early-access-note strong {
+  display: block;
+  margin-bottom: 5px;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.early-access-note p {
+  margin: 0;
+  color: #666;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
 @media (min-width: 521px) {
   #authScreen {
     width: 420px;
@@ -689,6 +712,11 @@ header h1 {
 </header>
 
   <div id="authScreen">
+  <div class="early-access-note">
+    <strong>Early Access</strong>
+    <p>Ubuntu Voice is currently in early access. You're among the first people helping us test and improve the experience.</p>
+  </div>
+
   <h2>Welcome</h2>
 
   <input id="emailInput" type="email" placeholder="Email">
