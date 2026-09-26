@@ -665,6 +665,11 @@ header h1 {
   order: unset;
 }
 }
+
+/* Hide the chat app until authentication is complete */
+.app-layout {
+  display: none;
+}
   </style>
 </head>
 
@@ -963,9 +968,10 @@ if (savedToken) {
   })
   .then(response => {
     if (response.ok) {
-      document.getElementById("authScreen").style.display = "none";
-        logoutButton.style.display = "block";
-        loadConversations();
+  document.getElementById("authScreen").style.display = "none";
+  document.querySelector(".app-layout").style.display = "flex";
+  logoutButton.style.display = "block";
+  loadConversations();
     } else {
       localStorage.removeItem("authToken");
       localStorage.removeItem("userId");
@@ -1106,8 +1112,9 @@ conversation.innerHTML = "";
 conversationList.innerHTML = "";
 authMessage.textContent = "";
 
-  document.getElementById("authScreen").style.display = "block";
-  logoutButton.style.display = "none";
+ document.getElementById("authScreen").style.display = "block";
+document.querySelector(".app-layout").style.display = "none";
+logoutButton.style.display = "none"; 
 };
 
 signupButton.onclick = async function () {
@@ -1187,10 +1194,9 @@ loginButton.onclick = async function () {
     authMessage.textContent = data.message;
 
     document.getElementById("authScreen").style.display = "none";
-
-    logoutButton.style.display = "block";
-
-    loadConversations();
+document.querySelector(".app-layout").style.display = "flex";
+logoutButton.style.display = "block";
+loadConversations();
 
   } catch (error) {
     console.error("LOGIN ERROR:", error);
