@@ -293,6 +293,57 @@ app.get("/conversations/:conversationId/messages", authenticateToken, (req, res)
     }
 });
 
+app.delete("/conversations/:conversationId", authenticateToken, (req, res) => {
+    try {
+        const conversationId = req.params.conversationId;
+
+        const conversation = db
+            .prepare(`
+                SELECT id
+                FROM conversations
+                WHERE conversation_id = ?
+                AND user_id = ?
+            `)
+            .get(conversationId, req.user.userId);
+
+        if (!conversation) {
+            return res.status(404).json({
+                error: "Conversation not found."
+            });
+        }
+
+        db.prepare(`
+            DELETE FROM feedback
+            WHERE conversation_id = ?
+            AND user_id = ?
+        `).run(conversationId, req.user.userId);
+
+        db.prepare(`
+            DELETE FROM messages
+            WHERE conversation_id = ?
+        `).run(conversationId);
+
+        db.prepare(`
+            DELETE FROM conversations
+            WHERE conversation_id = ?
+            AND user_id = ?
+        `).run(conversationId, req.user.userId);
+
+        conversations.delete(conversationId);
+
+        res.json({
+            success: true
+        });
+
+    } catch (error) {
+        console.error("DELETE CONVERSATION ERROR:", error);
+
+        res.status(500).json({
+            error: "Could not delete conversation."
+        });
+    }
+});
+
 app.post("/chat", authenticateToken, aiLimiter, async (req, res) => {
     try {
         const message = req.body.message;
