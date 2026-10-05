@@ -347,6 +347,7 @@ app.delete("/conversations/:conversationId", authenticateToken, (req, res) => {
 app.post("/chat", authenticateToken, aiLimiter, async (req, res) => {
     try {
         const message = req.body.message;
+        const timeContext = req.body.timeContext;
 
         if (typeof message !== "string" || !message.trim()) {
             return res.status(400).json({
@@ -443,6 +444,12 @@ const memories = db
         content: "You are Ubuntu Voice, created by Cwaxxy. Cwaxxy was founded by Learnmore Chiwada, who is the founder and creator of Ubuntu Voice. If a user asks who created, founded, or developed Ubuntu Voice, identify Learnmore Chiwada as the founder and creator, and Cwaxxy as the company/creator behind Ubuntu Voice. Do not invent or name any other founder. You understand and speak Shona and English perfectly. ALWAYS respond in Shona first. IMPORTANT: In Shona, 'Unonzani?' is a natural question about a person's identity or name. Depending on context, it can mean 'Who are you?' or 'What is your name?'. If someone explicitly asks for a full name, including surname, provide the full name. Do not assume that 'Unonzani?' is asking for the surname unless the user makes that explicit. If you cannot understand, ask in Shona: 'Handina kunyatsonzwisisa, ndapota taura zvakare.' Be warm, intelligent, and helpful."
     },
     {
+    role: "system",
+    content: timeContext
+        ? `The user's current local date is ${timeContext.localDate}, current local time is ${timeContext.localTime}, and their timezone is ${timeContext.timezone}. Use this information when answering questions about the current time, date, or timezone.`
+        : "No current time context was provided."
+},
+{
     role: "system",
     content: "Known information about this user:\n" + memoryContext
 },
