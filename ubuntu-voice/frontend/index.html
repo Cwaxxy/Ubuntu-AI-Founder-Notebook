@@ -1322,7 +1322,12 @@ localStorage.setItem(
           },
           body: JSON.stringify({
   message: message,
-  conversationId: conversationId
+  conversationId: conversationId,
+  timeContext: {
+    localTime: new Date().toLocaleTimeString(),
+    localDate: new Date().toLocaleDateString(),
+    timezone: Intl.DateTimeFormat().resolvedOptions().timeZone
+  }
 })
         });
 
