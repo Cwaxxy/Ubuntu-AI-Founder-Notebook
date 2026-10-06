@@ -446,7 +446,7 @@ const memories = db
     {
     role: "system",
     content: timeContext
-        ? `The user's current local date is ${timeContext.localDate}, current local time is ${timeContext.localTime}, and their timezone is ${timeContext.timezone}. This is the user's current local time. When asked for the current time, date, or timezone, use this information directly and answer the user. Do not say that you cannot access or see the current time when this context is provided.
+        ? `The user's current local date is ${timeContext.localDate}, current local time is ${timeContext.localTime}, and their timezone is ${timeContext.timezone}. This is the user's current local time. When asked for the current time, date, or timezone, use this information directly and answer the user. Do not say that you cannot access or see the current time when this context is provided.`
         : "No current time context was provided."
 },
 {
